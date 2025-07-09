@@ -1,11 +1,27 @@
+{{-- single article card --}}
 @props([
-    'title',
-    'description',
-    'date',
-    'author'
+    'headline',
+    'body',
+    'byline',
+    'pubDate',
+    'standFirst',
+    'webUrl'
 ])
+
+
+<?php
+
+$standFirst = strip_tags($standFirst);
+
+//calculate the url for the article
+$path     = parse_url($webUrl, PHP_URL_PATH);
+$baseName = pathinfo($path, PATHINFO_FILENAME);
+
+?>
+
 <article class="p-4 border rounded-md shadow">
-    <h2 class="text-lg font-semibold">{{ $title }}</h2>
-    <p class="text-sm text-gray-500">{{ $date }} by {{ $author }}</p>
-    <p class="mt-2">{{ $description }}</p>
+    <h2 class="text-lg font-semibold">{{ $headline }}</h2>
+    <p class="text-sm text-gray-500">{{ $pubDate }} by {{ $byline }}</p>
+    <p class="mt-2">{!! $standFirst !!}</p>
+    <a href="/latest-news/{{$baseName}}">Find out more</a>
 </article>

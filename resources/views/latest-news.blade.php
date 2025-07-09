@@ -7,11 +7,14 @@
     <section class="latest-news flex flex-col gap-2">
         @foreach($newsItems as $newsItem)
 
+
             <x-articles.card
-                :title="$newsItem['title']"
-                :date="$newsItem['date']"
-                :author="$newsItem['author']"
-                :description="$newsItem['description']"
+                :headline="$newsItem['fields']['headline']"
+                :body="$newsItem['fields']['body']"
+                :byline="$newsItem['fields']['byline'] ?? 'Unknown author'"
+                :pubDate="$newsItem['webPublicationDate']"
+                :standFirst="$newsItem['fields']['standfirst'] ?? '' "
+                :webUrl="$newsItem['webUrl']"
             />
 
         @endforeach

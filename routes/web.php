@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,22 +12,34 @@ Route::get('/about', function () {
 });
 
 Route::get('/latest-news', function () {
+    $sampleData = Storage::disk('public')->get('data.json');
+    $data       = json_decode($sampleData, true);
     return view('latest-news', [
-        'newsItems' => [
-            [
-                'title'       => 'Article',
-                'description' => 'Description of the article here',
-                'date'        => date('F d, Y'),
-                'author'      => 'John Doe',
-
-            ],
-            [
-                'title'       => 'Article 2',
-                'description' => 'This is another article!',
-                'date'        => date('F d, Y'),
-                'author'      => 'Joe Doe',
-
-            ]
-        ]
+        'newsItems' => $data['response']['results']
     ]);
+});
+
+Route::get('/latest-news/{newsItemId}', function ($newsItemId) {
+    $sampleData = Storage::disk('public')->get('data.json');
+    $data       = json_decode($sampleData, true);
+
+    $results = array_filter($data['response']['results'], function ($item) use ($newsItemId) {
+        $webUrl   = $item['webUrl'];
+        $path     = parse_url($webUrl, PHP_URL_PATH);
+        $baseName = pathinfo($path, PATHINFO_FILENAME);
+
+        return $baseName === $newsItemId;
+    });
+
+    $results = array_values($results);
+
+
+    if(count($results) > 0 ){
+        return view('components.articles.single', [
+            'item'  => $results[0]
+        ]);
+    }else{
+        return 'Not found';
+    }
+
 });
