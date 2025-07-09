@@ -7,10 +7,10 @@
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-body{
+body {
 
 }
 
@@ -18,11 +18,11 @@ h1 {
     @apply text-3xl;
 }
 
-h2{
+h2 {
     @apply text-2xl;
 }
 
-h3{
+h3 {
     @apply text-xl;
 }
 
@@ -30,6 +30,17 @@ h3{
     @apply flex flex-wrap gap-2;
 }
 
-#mobile-menu .nav-link{
+#mobile-menu .nav-link {
     display: block;
+}
+
+.button {
+    @apply px-3 py-2 bg-gray-800 text-white;
+}
+
+.single-article-page {
+
+    p {
+        @apply mb-4;
+    }
 }
