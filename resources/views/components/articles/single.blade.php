@@ -1,12 +1,13 @@
 @php use App\helpers\Helper; @endphp
 @props([
-    'item'
+    'article'
 ])
 <?php
-$date          = new DateTime($item['webPublicationDate']);
+$date          = new DateTime($article->webPublicationDate);
 $publishedDate = $date->format('d/m/Y, H:i');
 
 
+/*
 $tags = $item['tags'] ?? null;
 
 
@@ -14,20 +15,26 @@ $elements  = $item['elements'] ?? null;
 $thumbnail = Helper::array_find($elements, fn($item) => $item['relation'] === 'thumbnail'
 );
 
-$main = Helper::array_find($elements, fn($item) => $item['relation'] === 'main');
+$main = Helper::array_find($elements, fn($item) => $item['relation'] === 'main');*/
 
-$articleType = $item['type'] ?? null;
+$articleType = $article->type ?? null;
 
 ?>
 
 <x-layout>
     <x-slot:heading>
-        {{$item['fields']['headline']}}
+        {{$article->headline}}
     </x-slot:heading>
     <article class="single-article-page {{$articleType}}">
-        <h2 class="trail">{!!  $item['fields']['trailText'] ?? $item['fields']['trailText'] !!} </h2>
-        <p class="text-sm text-gray-500 mb-2">{{ $publishedDate }} by {{ $item['fields']['byline'] }}</p>
+        <h2 class="trail">{!!  $article->subtitle ?? $article->subtitle !!} </h2>
+        <p class="text-sm text-gray-500 mb-2">{{ $publishedDate }} by {{ $article->byline }}</p>
 
+
+        <section class="main">
+            <div class="content">{!! $article->body !!}</div>
+        </section>
+
+        {{--
         @if(!empty($tags))
 
             <div class="tags flex flex-wrap gap-2">
@@ -50,6 +57,7 @@ $articleType = $item['type'] ?? null;
         @endif
 
 
+
         <section class="main">
             @if (!empty($thumbnail))
                 <figure class="thumbnail">
@@ -63,6 +71,7 @@ $articleType = $item['type'] ?? null;
             <div class="content">{!! $item['fields']['body'] !!}</div>
         </section>
 
+--}}
 
     </article>
 

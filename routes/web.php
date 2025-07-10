@@ -17,42 +17,34 @@ Route::get('/latest-news', function () {
 
     $articles = Article::all();
 
-
     return view('latest-news', [
         'newsItems' => $articles
     ]);
 
-
-    /*
-    $sampleData = Storage::disk('public')->get('data.json');
-    $data       = json_decode($sampleData, true);
-    return view('latest-news', [
-        'newsItems' => $data['response']['results']
-    ]);*/
-
 });
 
 Route::get('/latest-news/{newsItemId}', function ($newsItemId) {
-    $sampleData = Storage::disk('public')->get('data.json');
-    $data       = json_decode($sampleData, true);
 
-    $results = array_filter($data['response']['results'], function ($item) use ($newsItemId) {
-        $webUrl   = $item['webUrl'];
-        $path     = parse_url($webUrl, PHP_URL_PATH);
-        $baseName = pathinfo($path, PATHINFO_FILENAME);
 
-        return $baseName === $newsItemId;
+    $articles = Article::all();
+    $article = $articles->first(function ($article) use ($newsItemId) {
+
+        $urlPath = parse_url($article->publication_url, PHP_URL_PATH);
+        $lastSegment = basename($urlPath);
+
+        return $lastSegment === $newsItemId;
+
     });
 
-    $results = array_values($results);
 
-
-    if(count($results) > 0 ){
+    if($article){
         return view('components.articles.single', [
-            'item'  => $results[0]
+            'article'  => $article
         ]);
     }else{
         return 'Not found';
     }
+
+
 
 });
