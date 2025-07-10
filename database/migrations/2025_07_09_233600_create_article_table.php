@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('byline')->nullable();
             $table->string('pillar')->nullable(); //pillarName
 
+
         });
     }
 

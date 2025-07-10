@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,11 +13,23 @@ Route::get('/about', function () {
 });
 
 Route::get('/latest-news', function () {
+
+
+    $articles = Article::all();
+
+
+    return view('latest-news', [
+        'newsItems' => $articles
+    ]);
+
+
+    /*
     $sampleData = Storage::disk('public')->get('data.json');
     $data       = json_decode($sampleData, true);
     return view('latest-news', [
         'newsItems' => $data['response']['results']
-    ]);
+    ]);*/
+
 });
 
 Route::get('/latest-news/{newsItemId}', function ($newsItemId) {
