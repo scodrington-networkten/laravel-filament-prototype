@@ -25,7 +25,7 @@ $articleType = $item['type'] ?? null;
         {{$item['fields']['headline']}}
     </x-slot:heading>
     <article class="single-article-page {{$articleType}}">
-        <h2 class="trail">{{ $item['fields']['trailText'] ?? $item['fields']['trailText'] }} </h2>
+        <h2 class="trail">{!!  $item['fields']['trailText'] ?? $item['fields']['trailText'] !!} </h2>
         <p class="text-sm text-gray-500 mb-2">{{ $publishedDate }} by {{ $item['fields']['byline'] }}</p>
 
         @if(!empty($tags))
@@ -60,9 +60,8 @@ $articleType = $item['type'] ?? null;
                     <figcaption>{{$thumbnail['assets'][0]['typeData']['altText']}}</figcaption>
                 </figure>
             @endif
-                <div class="content">{!! $item['fields']['body'] !!}</div>
+            <div class="content">{!! $item['fields']['body'] !!}</div>
         </section>
-
 
 
     </article>

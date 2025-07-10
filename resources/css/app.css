@@ -41,29 +41,47 @@ h3 {
 
 .single-article-page {
 
+
+
     p {
-        @apply  flex flex-col mb-4;
+        @apply flex flex-col mb-4;
     }
 
-    .main{
+    .main {
 
         @apply flex-col flex;
         @apply md:block;
 
-        .thumbnail{
+        .thumbnail {
 
             @apply md:float-left md:max-w-80 mr-4 mb-4;
         }
 
-        .content{
-            @apply flex flex-col gap-2;
+        .content {
 
-            .block{
-                @apply border-1 border-gray-600 rounded p-4;
+            .block {
+
             }
         }
 
     }
 
+
+    /** liveblogs have sections **/
+    &.liveblog {
+
+
+        .content {
+            @apply flex flex-col gap-2;
+
+
+            .block {
+
+                @apply border-1 border-gray-600 rounded p-4;
+            }
+        }
+
+
+    }
 
 }
