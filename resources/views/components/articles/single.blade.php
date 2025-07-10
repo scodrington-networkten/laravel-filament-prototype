@@ -1,3 +1,4 @@
+@php use App\helpers\Helper; @endphp
 @props([
     'item'
 ])
@@ -8,14 +9,23 @@ $publishedDate = $date->format('d/m/Y, H:i');
 
 $tags = $item['tags'] ?? null;
 
+
+$elements  = $item['elements'] ?? null;
+$thumbnail = Helper::array_find($elements, fn($item) => $item['relation'] === 'thumbnail'
+);
+
+$main = Helper::array_find($elements, fn($item) => $item['relation'] === 'main');
+
+$articleType = $item['type'] ?? null;
+
 ?>
 
 <x-layout>
     <x-slot:heading>
         {{$item['fields']['headline']}}
     </x-slot:heading>
-    <article class="single-article-page">
-        <h2 class="trail">{{isset($item['fields']['trailText']) ? $item['fields']['trailText'] : ''}} </h2>
+    <article class="single-article-page {{$articleType}}">
+        <h2 class="trail">{{ $item['fields']['trailText'] ?? $item['fields']['trailText'] }} </h2>
         <p class="text-sm text-gray-500 mb-2">{{ $publishedDate }} by {{ $item['fields']['byline'] }}</p>
 
         @if(!empty($tags))
@@ -40,7 +50,21 @@ $tags = $item['tags'] ?? null;
         @endif
 
 
-        <div class="description">{!! $item['fields']['body'] !!}</div>
+        <section class="main">
+            @if (!empty($thumbnail))
+                <figure class="thumbnail">
+                    <img
+                        src="{{$thumbnail['assets'][0]['file']}}"
+                        alt="{{$thumbnail['assets'][0]['typeData']['altText']}}"
+                    />
+                    <figcaption>{{$thumbnail['assets'][0]['typeData']['altText']}}</figcaption>
+                </figure>
+            @endif
+                <div class="content">{!! $item['fields']['body'] !!}</div>
+        </section>
+
+
+
     </article>
 
 </x-layout>
