@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -23,28 +24,4 @@ Route::get('/latest-news', function () {
 
 });
 
-Route::get('/latest-news/{newsItemId}', function ($newsItemId) {
-
-
-    $articles = Article::all();
-    $article = $articles->first(function ($article) use ($newsItemId) {
-
-        $urlPath = parse_url($article->publication_url, PHP_URL_PATH);
-        $lastSegment = basename($urlPath);
-
-        return $lastSegment === $newsItemId;
-
-    });
-
-
-    if($article){
-        return view('components.articles.single', [
-            'article'  => $article
-        ]);
-    }else{
-        return 'Not found';
-    }
-
-
-
-});
+Route::get('/latest-news/{newsItemId}', [ArticleController::class, 'show']);

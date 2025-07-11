@@ -7,7 +7,12 @@ use App\Models\Media;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Arr;
 
+/**
+ * Class MediaSeeder
+ * Populates media for given articles
+ */
 class MediaSeeder extends Seeder
 {
     /**
@@ -27,6 +32,13 @@ class MediaSeeder extends Seeder
         foreach ($articles as $article) {
             $elements = $article['elements'] ?? null;
 
+            //find the associated article in the DB (connecting sample data to real db data)
+            $dbArticle = Article::where('title', $article['webTitle'])->first();
+            if (!$dbArticle) {
+                $this->command->warn("A corresponding article could not be found, this media could not be created");
+                continue;
+            }
+
             //assess each element (finding the image types)
             foreach ($elements as $element) {
                 $elementType = $element['type'] ?? null;
@@ -35,29 +47,27 @@ class MediaSeeder extends Seeder
 
                 //extract assets (the image data)
                 $assets = $element['assets'] ?? null;
-                if (count($assets) == 0)
+                if (empty($assets))
                     continue;
 
-                //find the associated article in the DB (connecting sample data to real db data)
-                $dbArticle = Article::where('title', $article['webTitle'])->first();
-
-                //build up each media item
+                //build up each media item and create it
                 foreach ($assets as $asset) {
                     $relation = $element['relation'] ?? null;
                     $type     = $element['type'] ?? null;
                     $mimeType = $asset['mimeType'] ?? null;
                     $url      = $asset['file'] ?? null;
 
-                    $typeData = $asset['typeData'] ?? null;
+                    $typeData = Arr::get($asset, 'typeData', []);
 
-                    $metadata               = [];
-                    $metadata['alt_text']   = isset($typeData['altText']) ? (string)$typeData['altText'] : null;
-                    $metadata['caption']    = isset($typeData['caption']) ? (string)$typeData['caption'] : null;
-                    $metadata['credit']     = isset($typeData['credit']) ? (string)$typeData['credit'] : null;
-                    $metadata['source']     = isset($typeData['source']) ? (string)$typeData['source'] : null;
-                    $metadata['width']      = isset($typeData['width']) ? (int)$typeData['width'] : null;
-                    $metadata['height']     = isset($typeData['height']) ? (int)$typeData['height'] : null;
-                    $metadata['image_type'] = isset($typeData['imageType']) ? (string)$typeData['imageType'] : null;
+                    $metadata = [
+                        'alt_text'   => Arr::get($typeData, 'altText'),
+                        'caption'    => Arr::get($typeData, 'caption'),
+                        'credit'     => Arr::get($typeData, 'credit'),
+                        'source'     => Arr::get($typeData, 'source'),
+                        'width'      => Arr::get($typeData, 'width') ? (int)$typeData['width'] : null,
+                        'height'     => Arr::get($typeData, 'height') ? (int)$typeData['height'] : null,
+                        'image_type' => Arr::get($typeData, 'imageType'),
+                    ];
 
                     Media::create([
                         'article_id' => $dbArticle->id,

@@ -5,19 +5,21 @@
 <?php
 $date          = new DateTime($article->webPublicationDate);
 $publishedDate = $date->format('d/m/Y, H:i');
+$articleType   = $article->type ?? null;
 
+$thumbnail = null;
+foreach ($article->media as $media) {
+    $relation = $media->relation;
 
-/*
-$tags = $item['tags'] ?? null;
+    if ($relation == 'thumbnail') {
+        $thumbnail = $media;
+        break;
+    }
+}
 
+$thumbnailMetadata = json_decode($thumbnail->metadata);
 
-$elements  = $item['elements'] ?? null;
-$thumbnail = Helper::array_find($elements, fn($item) => $item['relation'] === 'thumbnail'
-);
-
-$main = Helper::array_find($elements, fn($item) => $item['relation'] === 'main');*/
-
-$articleType = $article->type ?? null;
+//dd($thumbnailMetadata);
 
 ?>
 
@@ -28,11 +30,6 @@ $articleType = $article->type ?? null;
     <article class="single-article-page {{$articleType}}">
         <h2 class="trail">{!!  $article->subtitle ?? $article->subtitle !!} </h2>
         <p class="text-sm text-gray-500 mb-2">{{ $publishedDate }} by {{ $article->byline }}</p>
-
-
-        <section class="main">
-            <div class="content">{!! $article->body !!}</div>
-        </section>
 
         {{--
         @if(!empty($tags))
@@ -56,22 +53,22 @@ $articleType = $article->type ?? null;
             </div>
         @endif
 
-
+           --}}
 
         <section class="main">
             @if (!empty($thumbnail))
                 <figure class="thumbnail">
                     <img
-                        src="{{$thumbnail['assets'][0]['file']}}"
-                        alt="{{$thumbnail['assets'][0]['typeData']['altText']}}"
+                        alt="{{$thumbnailMetadata->alt_text}}"
+                        width="{{$thumbnailMetadata->width}}"
+                        height="{{$thumbnailMetadata->height}}"
+                        src="{{$thumbnail->url}}"
                     />
-                    <figcaption>{{$thumbnail['assets'][0]['typeData']['altText']}}</figcaption>
+                    <figcaption>{{!empty($thumbnailMetadata->caption) ? $thumbnailMetadata->caption : 'no caption supplied'}}</figcaption>
                 </figure>
             @endif
-            <div class="content">{!! $item['fields']['body'] !!}</div>
+            <div class="content">{!! $article->body !!}</div>
         </section>
-
---}}
 
     </article>
 
