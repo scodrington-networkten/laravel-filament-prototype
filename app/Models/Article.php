@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Tag;
 
 class Article extends Model
 {
@@ -20,6 +22,10 @@ class Article extends Model
         'byline',
         'pillar',
     ];
+
+    public function tags() : BelongsToMany{
+        return $this->belongsToMany(Tag::class);
+    }
 
     public function media(): HasMany
     {
@@ -47,7 +53,7 @@ class Article extends Model
     }
 
     /**
-     * Given a media item, return the HTML img tag using it's info
+     * Given a media item, return the HTML img tag using its info
      *
      * @param Media $mediaItem
      *
