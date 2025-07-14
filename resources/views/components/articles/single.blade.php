@@ -1,7 +1,10 @@
-@php use App\helpers\Helper; @endphp
-@props([
-    'article'
-])
+@php /** @var \App\Models\Article $article */ @endphp
+
+@php
+    use App\helpers\Helper;
+    use App\Models\Article;
+@endphp
+
 <?php
 $date          = new DateTime($article->webPublicationDate);
 $publishedDate = $date->format('d/m/Y, H:i');
@@ -57,7 +60,7 @@ $thumbnailMetadata = json_decode($thumbnail->metadata);
 
         <section class="main">
 
-            @if(!empty($article->hasThumbnailImage()))
+            @if($article->hasThumbnailImage())
                 {!! $article->getImageForMediaItem($article->getThumbnailImage()) !!}
             @endif
 

@@ -18,14 +18,14 @@ class ArticleController extends Controller
             return $lastSegment === $articleUrl;
         });
 
-        if ($article) {
-            $article->getMainImages();
-            return view('components.articles.single', [
-                'article' => $article
-            ]);
-        } else {
-            return 'Not found';
+        if (!$article) {
+            abort(404);
         }
+
+        $article->getMainImages();
+        return view('components.articles.single', [
+            'article' => $article
+        ]);
     }
 
     public function index(): View

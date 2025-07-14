@@ -33,11 +33,34 @@ class Article extends Model
      */
     public function getThumbnailImage(): Media|null
     {
-        return $this->media()->firstWhere('relation', 'thumbnail');
+        return $this->media->firstWhere('relation', 'thumbnail');
     }
 
-    public function hasThumbnailImage(): bool{
+    /**
+     * returns if an article thumbnail exists
+     *
+     * @return bool
+     */
+    public function hasThumbnailImage(): bool
+    {
         return $this->getThumbnailImage() !== null;
+    }
+
+    /**
+     * Given a media item, return the HTML img tag using it's info
+     *
+     * @param Media $mediaItem
+     *
+     * @return string
+     */
+    public function getImageForMediaItem(Media $mediaItem): string
+    {
+        return "<img
+            width='{$mediaItem->width}'
+            height='{$mediaItem->height}'
+            alt='{$mediaItem->altText}'
+            src='{$mediaItem->url}'
+            title='{$mediaItem->title}'/>";
     }
 
     /**
@@ -56,24 +79,6 @@ class Article extends Model
         });
 
         return $mainImages;
-    }
-
-    /**
-     * Given a media item, return the HTML img tag using it's info
-     *
-     * @param $mediaItem media item
-     *
-     * @return string
-     */
-    public function getImageForMediaItem($mediaItem): string
-    {
-        $metadata = json_decode($mediaItem->metadata, true);
-        return "<img
-            width='{$metadata['width']}'
-            height='{$metadata['height']}'
-            src='{$mediaItem['url']}'
-            alt='$mediaItem->alt_text'
-            title='$mediaItem->title'/>";
     }
 
 }
