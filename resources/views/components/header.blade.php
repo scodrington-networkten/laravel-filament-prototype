@@ -15,6 +15,9 @@
                         <x-navigation.nav-link href="/latest-news" >
                             Latest News
                         </x-navigation.nav-link>
+                        <x-navigation.nav-link href="/sections" >
+                            Sections
+                        </x-navigation.nav-link>
 
                     </div>
                 </div>
@@ -79,6 +82,9 @@
             </x-navigation.nav-link>
             <x-navigation.nav-link href="/latest-news">
                 Latest News
+            </x-navigation.nav-link>
+            <x-navigation.nav-link href="/sections" >
+                Sections
             </x-navigation.nav-link>
 
         </div>
