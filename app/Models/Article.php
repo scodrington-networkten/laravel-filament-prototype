@@ -23,7 +23,8 @@ class Article extends Model
         'pillar',
     ];
 
-    public function tags() : BelongsToMany{
+    public function tags(): BelongsToMany
+    {
         return $this->belongsToMany(Tag::class);
     }
 
@@ -70,6 +71,19 @@ class Article extends Model
     }
 
     /**
+     * Given a media item, create a caption for its thumbnail
+     *
+     * @param Media $mediaItem
+     *
+     * @return string
+     */
+    public function getCaptionForMediaItem(Media $mediaItem): string
+    {
+        $caption = !empty($mediaItem->caption()) ? $mediaItem->caption() : $mediaItem->altText();
+        return "<figcaption>{$caption}</figcaption>";
+    }
+
+    /**
      * Returns an array of associated media items for the article, sorted by largest image first
      *
      * @return array|null
@@ -85,6 +99,11 @@ class Article extends Model
         });
 
         return $mainImages;
+    }
+
+    public function getKeywordTags(): Collection|null
+    {
+        return $this->tags->where('type', 'keyword')->sort();
     }
 
 }
