@@ -19,3 +19,4 @@ Route::get('/latest-news', [ArticleController::class, 'index']);
 Route::get('/latest-news/{newsItemId}', [ArticleController::class, 'show']);
 
 Route::get('/sections', [TagController::class, 'indexSection']);
+Route::get('/tags/{tag}', [TagController::class, 'show'])->where('tag', '.*');

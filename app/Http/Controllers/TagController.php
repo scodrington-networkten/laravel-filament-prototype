@@ -20,4 +20,19 @@ class TagController extends Controller
             'tags' => $sectionTags
         ]);
     }
+
+    /**
+     * Show a single tag, without route binding, we need to manually find the tag
+     *
+     * @param string $tagUid
+     *
+     * @return View
+     */
+    public function show(string $tagUid): View
+    {
+        $tag = Tag::where('uid', $tagUid)->first();
+        return view('components.tags.single', [
+            'tag' => $tag
+        ]);
+    }
 }
