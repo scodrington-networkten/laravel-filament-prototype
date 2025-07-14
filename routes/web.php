@@ -13,15 +13,6 @@ Route::get('/about', function () {
     return ('Hello world');
 });
 
-Route::get('/latest-news', function () {
-
-
-    $articles = Article::all();
-
-    return view('latest-news', [
-        'newsItems' => $articles
-    ]);
-
-});
-
+//news endpoints
+Route::get('/latest-news', [ArticleController::class, 'index']);
 Route::get('/latest-news/{newsItemId}', [ArticleController::class, 'show']);

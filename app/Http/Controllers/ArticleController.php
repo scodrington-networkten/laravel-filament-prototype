@@ -19,11 +19,20 @@ class ArticleController extends Controller
         });
 
         if ($article) {
+            $article->getMainImages();
             return view('components.articles.single', [
                 'article' => $article
             ]);
         } else {
             return 'Not found';
         }
+    }
+
+    public function index(): View
+    {
+        $articles = Article::all();
+        return view('latest-news', [
+            'newsItems' => $articles
+        ]);
     }
 }

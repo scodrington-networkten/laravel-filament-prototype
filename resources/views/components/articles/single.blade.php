@@ -56,6 +56,11 @@ $thumbnailMetadata = json_decode($thumbnail->metadata);
            --}}
 
         <section class="main">
+
+            @if(!empty($article->hasThumbnailImage()))
+                {!! $article->getImageForMediaItem($article->getThumbnailImage()) !!}
+            @endif
+
             @if (!empty($thumbnail))
                 <figure class="thumbnail">
                     <img
