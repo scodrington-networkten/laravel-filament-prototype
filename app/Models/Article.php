@@ -24,6 +24,7 @@ class Article extends Model
         'publication_url',
         'byline',
         'pillar',
+        'section_id'
     ];
 
     public function tags(): BelongsToMany

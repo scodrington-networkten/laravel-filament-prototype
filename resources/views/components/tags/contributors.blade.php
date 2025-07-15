@@ -9,7 +9,7 @@
                 @foreach($tags as $tag)
 
                     @php
-                        $url = "contributor/{$tag->uid}";
+                        $url = "contributors/{$tag->uid}";
                         $image = !empty($tag->image_url) ? $tag->image_url : '/placeholder_profile_image.webp';
                     @endphp
 

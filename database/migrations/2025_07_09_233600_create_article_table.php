@@ -24,8 +24,7 @@ return new class extends Migration {
             $table->string('publication_url')->nullable(); //webUrl
             $table->string('byline')->nullable();
             $table->string('pillar')->nullable(); //pillarName
-
-
+            $table->string('section_id')->nullable();
         });
     }
 

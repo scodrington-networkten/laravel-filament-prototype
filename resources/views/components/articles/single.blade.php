@@ -21,7 +21,6 @@ $articleType   = $article->type ?? null;
         <p class="text-sm text-gray-500 mb-2">{{ $publishedDate }} by {{ $article->byline }}</p>
 
         <section class="main">
-
             @if($article->getKeywordTags())
                 <div class="keyword-tags flex flex-wrap gap-2 mb-2">
                     @foreach($article->getKeywordTags() as $tag)

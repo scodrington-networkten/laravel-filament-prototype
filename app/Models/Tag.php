@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Article;
 
@@ -18,6 +19,11 @@ class Tag extends Model
     public function articles(): BelongsToMany
     {
         return $this->belongsToMany(Article::class);
+    }
+
+    public function section(): BelongsTo
+    {
+        return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
     /**

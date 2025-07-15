@@ -47,9 +47,25 @@ class TagController extends Controller
     public function contributors(): View
     {
         $tags = Tag::where('type', 'contributor')->get();
-
         return view('components.tags.contributors', [
             'tags' => $tags
+        ]);
+    }
+
+    /**
+     * Get the associated article for a single contributor (tag)
+     *
+     * @param string $tagUid
+     *
+     * @return View
+     */
+    public function contributor(string $tagUid): View
+    {
+        $tag      = Tag::where('uid', $tagUid)->first();
+        $articles = $tag->articles()->get();
+        return view('components.tags.single', [
+            'tag'      => $tag,
+            'articles' => $articles
         ]);
     }
 }

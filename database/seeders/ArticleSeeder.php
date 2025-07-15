@@ -36,6 +36,7 @@ class ArticleSeeder extends Seeder
                 'pillar'             => $article['pillarName'],
                 'created_at'         => now(),
                 'updated_at'         => now(),
+                'section_id'         => $article['sectionId'] ?? null,
             ]);
         }
     }

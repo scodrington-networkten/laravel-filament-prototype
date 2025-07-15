@@ -48,6 +48,8 @@ class TagSeeder extends Seeder
                         'image_url'       => $tagData['bylineImageUrl'] ?? null,
                         'image_url_large' => $tagData['bylineLargeImageUrl'] ?? null,
                         'bio'             => $tagData['bio'] ?? null,
+                        'first_name'      => $tagData['firstName'] ?? null,
+                        'last_name'       => $tagData['lastName'] ?? null,
                     ]);
                 }
 

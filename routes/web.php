@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TagController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
@@ -21,11 +22,15 @@ Route::get('/articles/{articleId}', [ArticleController::class, 'show']);
 
 
 //tags endpoints
-Route::get('/sections', [TagController::class, 'indexSection']);
+//Route::get('/sections', [TagController::class, 'indexSection']);
 
 
 Route::get('/tags/{tag}', [TagController::class, 'show'])->where('tag', '.*');
 
 //tag - contributors
 Route::get('/contributors', [TagController::class, 'contributors']);
-Route::get('/contributors/{$tag}', [TagController::class, 'contributor'])->where('tag', '.*');
+Route::get('/contributors/{tag}', [TagController::class, 'contributor'])->where('tag', '.*');
+
+//sections
+Route::get('/sections', [SectionController::class, 'index']);
+Route::get('/sections/{sectionId}', [SectionController::class, 'show']);
