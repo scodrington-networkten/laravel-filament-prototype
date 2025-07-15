@@ -9,16 +9,21 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <x-navigation.nav-link href="/" >
+                        <x-navigation.nav-link href="/">
                             Home
                         </x-navigation.nav-link>
-                        <x-navigation.nav-link href="/latest-news" >
+                        <x-navigation.nav-link href="/latest-news">
                             Latest News
                         </x-navigation.nav-link>
-                        <x-navigation.nav-link href="/sections" >
+                        <x-navigation.nav-link href="/sections">
                             Sections
                         </x-navigation.nav-link>
-
+                        <x-navigation.nav-link href="/contributors">
+                            Contributors
+                        </x-navigation.nav-link>
+                        <x-navigation.nav-link href="/tags">
+                            Tags
+                        </x-navigation.nav-link>
                     </div>
                 </div>
             </div>
@@ -83,8 +88,14 @@
             <x-navigation.nav-link href="/latest-news">
                 Latest News
             </x-navigation.nav-link>
-            <x-navigation.nav-link href="/sections" >
+            <x-navigation.nav-link href="/sections">
                 Sections
+            </x-navigation.nav-link>
+            <x-navigation.nav-link href="/contributors">
+                Contributors
+            </x-navigation.nav-link>
+            <x-navigation.nav-link href="/tags">
+                Tags
             </x-navigation.nav-link>
 
         </div>
@@ -114,11 +125,6 @@
                 <a href="#"
                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your
                     Profile</a>
-                <a href="#"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-                <a href="#"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign
-                    out</a>
             </div>
         </div>
     </div>

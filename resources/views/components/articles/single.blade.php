@@ -18,9 +18,9 @@ $articleType   = $article->type ?? null;
     </x-slot:heading>
     <article class="single-article-page {{$articleType}}">
         <h2 class="trail">{!! $article->subtitle !!} </h2>
-        <p class="text-sm text-gray-500 mb-2">{{ $publishedDate }} by {{ $article->byline }}</p>
-
-        <section class="main">
+        <p class="text-sm text-gray-500 ">{{ $publishedDate }} by {{ $article->byline }}</p>
+        <p class="section"><i class="fa-solid fa-layer-group"></i><strong> {{$article->section_id}}</strong></p>
+        <section class="main mt-2">
             @if($article->getKeywordTags())
                 <div class="keyword-tags flex flex-wrap gap-2 mb-2">
                     @foreach($article->getKeywordTags() as $tag)

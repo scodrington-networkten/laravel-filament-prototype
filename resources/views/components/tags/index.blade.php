@@ -1,9 +1,8 @@
 <x-layout>
     <x-slot:heading>
-        Sections
+        Tags
     </x-slot:heading>
-    <p>Sections of news</p>
-
+    <h3 class="mb-3"> Current tag listing</h3>
     <section class="sections flex flex-col gap-2">
         @if($tags)
             <div class="section-tags flex flex-wrap gap-2">

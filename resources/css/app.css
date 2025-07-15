@@ -48,7 +48,7 @@ h3 {
 .single-article-page {
 
 
-    p {
+    .main p {
         @apply mb-4;
     }
 

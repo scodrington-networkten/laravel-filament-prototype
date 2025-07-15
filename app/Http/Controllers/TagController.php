@@ -12,12 +12,12 @@ class TagController extends Controller
      *
      * @return View
      */
-    public function indexSection()
+    public function index()
     {
-        $sectionTags = Tag::where('type', 'keyword')->where('section_id', '!=', null)->get();
+        $tags = Tag::all();
 
-        return view('components.tags.sections', [
-            'tags' => $sectionTags
+        return view('components.tags.index', [
+            'tags' => $tags
         ]);
     }
 
