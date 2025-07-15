@@ -30,9 +30,12 @@ class TagController extends Controller
      */
     public function show(string $tagUid): View
     {
-        $tag = Tag::where('uid', $tagUid)->first();
+        $tag      = Tag::where('uid', $tagUid)->first();
+        $articles = $tag->articles()->get();
+
         return view('components.tags.single', [
-            'tag' => $tag
+            'tag'      => $tag,
+            'articles' => $articles
         ]);
     }
 }

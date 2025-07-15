@@ -32,13 +32,8 @@ $articleType   = $article->type ?? null;
                 </div>
             @endif
 
-            @if (!empty($thumbnail))
-                <figure class="thumbnail">
-                    @if($article->hasThumbnailImage())
-                        {!! $article->getImageForMediaItem($article->getThumbnailImage()) !!}
-                        {!! $article->getCaptionForMediaItem($article->getThumbnailImage()) !!}
-                    @endif
-                </figure>
+            @if (!empty($article->thumbnail))
+                {!!  $article->thumbnail !!}
             @endif
             <div class="content">{!! $article->body !!}</div>
         </section>

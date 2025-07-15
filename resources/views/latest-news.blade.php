@@ -14,6 +14,7 @@
                 :webPublicationDate="$newsItem->webPublicationDate"
                 :subtitle="$newsItem->subtitle ?? '' "
                 :publicationUrl="$newsItem->publication_url"
+                :thumbnail="$newsItem->thumbnail"
             />
 
         @endforeach

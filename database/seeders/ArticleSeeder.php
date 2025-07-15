@@ -23,6 +23,7 @@ class ArticleSeeder extends Seeder
         $articles = $data['records'];
         foreach ($articles as $article) {
             Article::create([
+                'uid'                => $article['id'],
                 'type'               => $article['type'],
                 'title'              => $article['fields']['headline'],
                 'subtitle'           => $article['fields']['trailText'] ?? null,

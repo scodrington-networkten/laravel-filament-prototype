@@ -26,7 +26,7 @@ class TagSeeder extends Seeder
 
         foreach ($articles as $article) {
             //find article model
-            $articleModel = Article::where('title', $article['webTitle'])->first();
+            $articleModel = Article::where('uid', $article['id'])->first();
             if (!$articleModel) {
                 continue;
             }

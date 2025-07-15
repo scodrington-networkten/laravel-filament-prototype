@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Tag;
 
+/**
+ * Class Article
+ */
 class Article extends Model
 {
     protected $fillable = [
@@ -31,6 +34,16 @@ class Article extends Model
     public function media(): HasMany
     {
         return $this->hasMany(Media::class);
+    }
+
+    /**
+     * Add a dynamic attribute so we can access the thumbnail for the article
+     *
+     * @return string|null
+     */
+    public function getThumbnailAttribute(): string|null
+    {
+        return $this->hasThumbnailImage() ? $this->getImageForMediaItem($this->getThumbnailImage()) : null;
     }
 
     /**
