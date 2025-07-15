@@ -2,11 +2,10 @@
     <x-slot:heading>
         Latest
     </x-slot:heading>
-    <p>Latest News page here</p>
+    <h3 class="mb-4">Checkout the latest news and stories</h3>
 
     <section class="latest-news flex flex-col gap-2">
         @foreach($newsItems as $newsItem)
-
             <x-articles.card
                 :title="$newsItem->title"
                 :body="$newsItem->body"

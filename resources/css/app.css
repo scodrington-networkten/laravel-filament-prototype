@@ -5,6 +5,8 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
@@ -46,8 +48,8 @@ h3 {
 .single-article-page {
 
 
-    > p {
-        @apply flex flex-col mb-4;
+    p {
+        @apply mb-4;
     }
 
     .main {
@@ -76,12 +78,14 @@ h3 {
 
 
         .content {
-            @apply flex flex-col gap-2;
+            @apply block;
+        }
 
+        .block {
+            @apply border-b-1 border-b-gray-600 mb-4;
 
-            .block {
-
-                @apply border-1 border-gray-600 rounded p-4;
+            .block-time {
+                @apply bg-gray-600 text-white p-2;
             }
         }
 
@@ -107,9 +111,43 @@ h3 {
         }
     }
 
-    .abstract{
+    .abstract {
         @apply mb-2;
         @apply md:mb-4;
     }
+
+}
+
+.subtitle{
+    @apply mb-4;
+}
+
+.contributors-list{
+    @apply flex flex-col gap-4;
+}
+
+/** single contributor card**/
+.contributor-profile-card{
+
+    @apply md:flex md:flex-wrap gap-4;
+
+    img{
+        @apply rounded-full w-25 h-25;
+
+    }
+
+    .contributor-info{
+        @apply flex flex-col basis-0 grow items-start gap-1;
+    }
+
+    .article-count{
+
+
+    }
+
+    .bio{
+
+    }
+
 
 }

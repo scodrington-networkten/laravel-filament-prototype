@@ -33,7 +33,7 @@ class MediaSeeder extends Seeder
             $elements = $article['elements'] ?? null;
 
             //find the associated article in the DB (connecting sample data to real db data)
-            $dbArticle = Article::where('title', $article['webTitle'])->first();
+            $dbArticle = Article::where('uid', $article['id'])->first();
             if (!$dbArticle) {
                 $this->command->warn("A corresponding article could not be found, this media could not be created");
                 continue;

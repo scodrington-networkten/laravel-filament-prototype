@@ -22,4 +22,10 @@ Route::get('/articles/{articleId}', [ArticleController::class, 'show']);
 
 //tags endpoints
 Route::get('/sections', [TagController::class, 'indexSection']);
+
+
 Route::get('/tags/{tag}', [TagController::class, 'show'])->where('tag', '.*');
+
+//tag - contributors
+Route::get('/contributors', [TagController::class, 'contributors']);
+Route::get('/contributors/{$tag}', [TagController::class, 'contributor'])->where('tag', '.*');

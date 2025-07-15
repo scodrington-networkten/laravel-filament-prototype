@@ -38,4 +38,18 @@ class TagController extends Controller
             'articles' => $articles
         ]);
     }
+
+    /**
+     * Index page for showing all contributors (tags with type 'contributor')
+     *
+     * @return View
+     */
+    public function contributors(): View
+    {
+        $tags = Tag::where('type', 'contributor')->get();
+
+        return view('components.tags.contributors', [
+            'tags' => $tags
+        ]);
+    }
 }

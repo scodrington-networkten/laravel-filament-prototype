@@ -17,12 +17,15 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'uid'         => $this->faker->unique()->slug,
-            'type'        => $this->faker->randomElement(['keyword', 'campaign', 'type', 'tone']),
-            'section_id'  => $this->faker->optional(0.8)->word,
-            'section_name' => $this->faker->optional(0.6)->word,
-            'web_title'   => $this->faker->unique()->sentence(3),
-            'web_url'     => $this->faker->unique()->url
+            'uid'             => $this->faker->unique()->slug,
+            'type'            => $this->faker->randomElement(['keyword', 'campaign', 'type', 'tone']),
+            'section_id'      => $this->faker->optional(0.8)->word,
+            'section_name'    => $this->faker->optional(0.6)->word,
+            'web_title'       => $this->faker->unique()->sentence(3),
+            'web_url'         => $this->faker->unique()->url,
+            'image_url'       => $this->faker->optional(0.8)->imageUrl('200', '200'),
+            'image_url_large' => $this->faker->optional(0.8)->imageUrl('400', '400'),
+            'bio'             => $this->faker->optional(0.9)->paragraph(2)
         ];
     }
 }

@@ -37,7 +37,7 @@ $baseName = pathinfo($path, PATHINFO_FILENAME);
         </a>
         <p class="byline text-sm text-gray-500">{{ $webPublicationDate }} by {{ $byline }}</p>
         <p class="abstract mt-2 mb-3">{!! $subtitle !!}</p>
-        <a class="button" href="/articles/{{$baseName}}">Find out more</a>
+        <a class="button" href="/articles/{{$baseName}}">Read More</a>
     </div>
 
 </article>

@@ -43,7 +43,7 @@ class Article extends Model
      */
     public function getThumbnailAttribute(): string|null
     {
-        return $this->hasThumbnailImage() ? $this->getImageForMediaItem($this->getThumbnailImage()) : null;
+        return $this->hasThumbnailImage() ? $this->getImageForMediaItem($this->getThumbnailImage(), 'thumbnail') : null;
     }
 
     /**
@@ -73,9 +73,10 @@ class Article extends Model
      *
      * @return string
      */
-    public function getImageForMediaItem(Media $mediaItem): string
+    public function getImageForMediaItem(Media $mediaItem, string $classes = ''): string
     {
         return "<img
+            class='{$classes}'
             width='{$mediaItem->width}'
             height='{$mediaItem->height}'
             alt='{$mediaItem->altText}'

@@ -39,12 +39,15 @@ class TagSeeder extends Seeder
                 $tagModel = Tag::where('uid', $uid)->first();
                 if (!$tagModel) {
                     $tagModel = Tag::factory()->create([
-                        'uid'          => $tagData['id'],
-                        'type'         => $tagData['type'],
-                        'section_id'   => $tagData['sectionId'] ?? null,
-                        'section_name' => $tagData['sectionName'] ?? null,
-                        'web_title'    => $tagData['webTitle'],
-                        'web_url'      => $tagData['webUrl']
+                        'uid'             => $tagData['id'],
+                        'type'            => $tagData['type'],
+                        'section_id'      => $tagData['sectionId'] ?? null,
+                        'section_name'    => $tagData['sectionName'] ?? null,
+                        'web_title'       => $tagData['webTitle'],
+                        'web_url'         => $tagData['webUrl'],
+                        'image_url'       => $tagData['bylineImageUrl'] ?? null,
+                        'image_url_large' => $tagData['bylineLargeImageUrl'] ?? null,
+                        'bio'             => $tagData['bio'] ?? null,
                     ]);
                 }
 

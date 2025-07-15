@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('section_name')->nullable();
             $table->string('web_title');
             $table->string('web_url');
+            $table->string('image_url_large')->nullable();
+            $table->string('image_url')->nullable();
+            $table->text('bio')->nullable();
         });
     }
 
