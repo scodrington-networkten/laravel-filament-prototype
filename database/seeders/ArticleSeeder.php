@@ -13,15 +13,14 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $json = Storage::disk('public')->get('sample-data.json');
+        $json = Storage::get('sample-articles.json');
         $data = json_decode($json, true);
 
         if (!$data) {
-            $this->command->info("could not find sample data.json");
+            $this->command->info("could not find sample-articles.json");
         }
 
-        $articles = $data['records'];
-        foreach ($articles as $article) {
+        foreach ($data as $article) {
             Article::create([
                 'uid'                => $article['id'],
                 'type'               => $article['type'],
@@ -33,7 +32,7 @@ class ArticleSeeder extends Seeder
                 'publication'        => $article['fields']['publication'],
                 'publication_url'    => $article['webUrl'],
                 'byline'             => $article['fields']['byline'] ?? null,
-                'pillar'             => $article['pillarName'],
+                'pillar'             => $article['pillarName'] ?? null,
                 'created_at'         => now(),
                 'updated_at'         => now(),
                 'section_id'         => $article['sectionId'] ?? null,

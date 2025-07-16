@@ -55,6 +55,8 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "post-install-cmd": [
         ]
     },
     "extra": {

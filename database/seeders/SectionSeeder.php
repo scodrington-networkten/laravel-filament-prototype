@@ -14,15 +14,14 @@ class SectionSeeder extends Seeder
      */
     public function run(): void
     {
-        $json = Storage::disk('public')->get('sections-data.json');
+        $json = Storage::get('sample-sections.json');
         $data = json_decode($json, true);
 
         if (!$data) {
             $this->command->info("could not find sample sections-data.json");
         }
 
-        $sections = $data['records'];
-        foreach ($sections as $section) {
+        foreach ($data as $section) {
             Section::factory()->create([
                 'uid'       => $section['id'],
                 'web_title' => $section['webTitle'],
