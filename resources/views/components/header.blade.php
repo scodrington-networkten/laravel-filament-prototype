@@ -12,18 +12,29 @@
                         <x-navigation.nav-link href="/">
                             Home
                         </x-navigation.nav-link>
-                        <x-navigation.nav-link href="/latest-news">
-                            Latest News
-                        </x-navigation.nav-link>
-                        <x-navigation.nav-link href="/sections">
-                            Sections
-                        </x-navigation.nav-link>
-                        <x-navigation.nav-link href="/contributors">
-                            Contributors
-                        </x-navigation.nav-link>
-                        <x-navigation.nav-link href="/tags">
-                            Tags
-                        </x-navigation.nav-link>
+                        <x-navigation.nav-link href="/latest-news">Latest News</x-navigation.nav-link>
+                        <x-navigation.nav-link href="/sections">Sections</x-navigation.nav-link>
+                        <x-navigation.nav-link href="/contributors">Contributors</x-navigation.nav-link>
+                        <span class="nested-nav-link">
+                             <x-navigation.nav-link href="/tags">Tags</x-navigation.nav-link>
+
+
+                            @php
+                                use App\Models\Tag;
+                               // $items = Tag::all();
+
+                                $items = Tag::where('type', 'keyword')
+                                ->withCount('articles')
+                                ->orderBy('articles_count', 'desc')
+                                ->take(10)
+                                ->get();
+
+                            @endphp
+
+                            <x-navigation.nested-nav-submenu :items="$items"/>
+
+                        </span>
+
                     </div>
                 </div>
             </div>
