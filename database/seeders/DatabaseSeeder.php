@@ -14,13 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+        $this->call([
+            VideoAssetSeeder::class,
+        ]);
+        /*
         $this->call([
             UserSeeder::class,
             ArticleSeeder::class,
             MediaSeeder::class,
             SectionSeeder::class,
             TagSeeder::class
-        ]);
+        ]);*/
     }
+
 }
