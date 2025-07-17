@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasGuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class VideoAsset extends Model
+
 {
+    use HasGuid;
 
     protected $fillable = [
         'title',
         'description',
         'guid',
-        //'mediaAvailableDate',
-        //'mediaExpirationDate',
+        'media_available_date',
+        'media_expiration_date',
     ];
 
     protected $casts = [

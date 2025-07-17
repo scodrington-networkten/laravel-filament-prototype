@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->string('title');
             $table->string('description');
             $table->string('guid')->unique();
+            $table->integer('media_available_date')->nullable();
+            $table->integer('media_expiration_date')->nullable();
         });
     }
 
