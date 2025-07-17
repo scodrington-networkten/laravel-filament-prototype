@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->string('guid')->unique();
             $table->integer('media_available_date')->nullable();
             $table->integer('media_expiration_date')->nullable();
+            $table->json('media_ratings')->nullable();
+            $table->json('pl_media_chapters')->nullable();
         });
     }
 

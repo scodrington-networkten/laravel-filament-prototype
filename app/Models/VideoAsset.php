@@ -17,10 +17,14 @@ class VideoAsset extends Model
         'guid',
         'media_available_date',
         'media_expiration_date',
+        'media_ratings',
+        'pl_media_approved',
+        'pl_media_chapters'
     ];
 
     protected $casts = [
-        'mediaRatings' => 'array',
+        'media_ratings'     => 'array',
+        'pl_media_chapters' => 'array'
     ];
 
     /** @use HasFactory<\Database\Factories\VideoAssetFactory> */

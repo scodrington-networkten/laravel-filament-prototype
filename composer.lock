@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4bf885fcc27563495812cbe10d6588c",
+    "content-hash": "ba232ea9ce21c6b12ef2478736c26aff",
     "packages": [
+        {
+            "name": "afs19/filament-vertical-tabs",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AFS19/filament-vertical-tabs.git",
+                "reference": "c2c7ec1bc25cef094429ac6f513a27d248879116"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AFS19/filament-vertical-tabs/zipball/c2c7ec1bc25cef094429ac6f513a27d248879116",
+                "reference": "c2c7ec1bc25cef094429ac6f513a27d248879116",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "laravel/framework": "^11.0 || ^12.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Afs19\\FilamentVerticalTabs\\FilamentVerticalTabsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Afs19\\FilamentVerticalTabs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AFS19",
+                    "email": "iireco20@gmail.com"
+                }
+            ],
+            "description": "A Filament v3 package that adds vertical tabs functionality",
+            "keywords": [
+                "filament",
+                "laravel",
+                "tabs",
+                "vertical"
+            ],
+            "support": {
+                "issues": "https://github.com/AFS19/filament-vertical-tabs/issues",
+                "source": "https://github.com/AFS19/filament-vertical-tabs/tree/v1.0.1"
+            },
+            "time": "2025-05-06T08:01:19+00:00"
+        },
         {
             "name": "anourvalar/eloquent-serialize",
             "version": "1.3.3",

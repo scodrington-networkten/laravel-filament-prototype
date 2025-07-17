@@ -30,6 +30,19 @@ class VideoAssetFactory extends Factory
             'guid'                  => $this->faker->uuid(),
             'media_available_date'  => $mediaAvailableDate,
             'media_expiration_date' => $mediaExpirationDate,
+            'media_ratings'         => null,
+            'pl_media_approved'     => $this->faker->boolean(50),
+            'chapters'              => [
+                [
+                    'start_time' => '100.5',
+                    'title'      => 'Chapter 1'
+                ],
+                [
+                    'start_time' => '205.5',
+                    'title'      => 'Chapter 2'
+                ]
+
+            ]
         ];
     }
 }
