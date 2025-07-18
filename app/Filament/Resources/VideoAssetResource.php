@@ -24,6 +24,9 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\Split;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\Radio;
 
 class VideoAssetResource extends Resource
 {
@@ -36,6 +39,7 @@ class VideoAssetResource extends Resource
         return $form
             ->schema([
                 Tabs::make('Form Tabs')
+                    ->columnSpanFull()
                     //->vertical() (this uses a package to create vertcal tabs, generates alpine error)
                     ->tabs([
                         Tab::make('Primary')
@@ -84,7 +88,70 @@ class VideoAssetResource extends Resource
                                        ->label('Pl Media Approved')
                                        ->default(false),
                                self::getChaptersField()
-                           ])
+                           ]),
+
+                        Tab::make('TV Data')
+                           ->icon('heroicon-o-chart-bar')
+                           ->schema([
+                               TextInput::make('tv_channel')
+                                        ->placeholder('TEN'),
+                               TextInput::make('tv_episode')
+                                        ->placeholder('EDG15/013'),
+                               TextInput::make('tv_season')
+                                        ->placeholder('15'),
+                               TextInput::make('tv_show')
+                                        ->placeholder('Everyday Gourmet With Justine Schofield'),
+                               TextInput::make('tv_show_group')
+                                        ->placeholder('everydaygourmet'),
+                               TextInput::make('tv_week')
+                                        ->hint('Week number e.g. 10')
+                                        ->type('integer'),
+                           ]),
+                        Tab::make('Extras')
+                           ->icon('heroicon-o-bell')
+                           ->schema([
+                               self::getDateField('Broadcast Date Previous', 'broadcast_date_previous'),
+                               TextInput::make('production_company')
+                                        ->placeholder('Production Company'),
+                               TextInput::make('production_country')
+                                        ->placeholder('Production Country'),
+                               Select::make('program_classification')
+                                     ->options([
+                                         'G'     => 'G',
+                                         'PG'    => 'PG',
+                                         'M'     => 'M',
+                                         'MA15+' => 'MA15+',
+                                         'R18+'  => 'R18+',
+                                     ]),
+                               TextInput::make('program_language')
+                                        ->placeholder('Program Language'),
+                               Checkbox::make('restriction_by_member')
+                                       ->default(false),
+                               TextInput::make('clip_category'),
+                               TextInput::make('consumer_advice'),
+                               TextInput::make('content_security'),
+                               TextInput::make('dmi_show_id')
+                                        ->hint('e.g. 3382')
+                                        ->type('integer'),
+                               TextInput::make('series_crid')
+                                        ->hint('e.g. 82517')
+                                        ->type('integer'),
+                               Checkbox::make('shoppable_enabled')
+                                       ->default(false),
+                               Section::make('Type')
+                                      ->schema([
+                                          Radio::make('video_format_type')
+                                               ->options([
+                                                   'full_episode' => 'Full Episode',
+                                                   'short_form'   => 'Short Form',
+                                               ])
+                                      ]),
+                               self::getSegmentsField(),
+                               TextInput::make('pl_media_pid')
+                                        ->type('integer')
+                                        ->placeholder('7706920000017700')
+
+                           ]),
                     ])
             ]);
     }
@@ -151,6 +218,20 @@ class VideoAssetResource extends Resource
                          });
     }
 
+    protected static function getSegmentsField(): Repeater
+    {
+        return Repeater::make('video_segements')
+                       ->label('Video Segments')
+                       ->addActionLabel('Add a video segment')
+                       ->helperText('Define a repater of video segments, each outlining a section of time ')
+                       ->schema([
+                           TextInput::make('segment')
+                                    ->type('integer')
+                                    ->placeholder('e.g. 100')
+
+                       ]);
+    }
+
     /**
      * Returns a section of media ratings for the asset
      *
@@ -164,6 +245,7 @@ class VideoAssetResource extends Resource
                       ->schema([
                           Repeater::make('media_ratings')
                                   ->label('Media Ratings')
+                                  ->collapsible()
                                   ->addActionLabel('Add a Media Rating')
                                   ->default([])
                                   ->schema([
@@ -188,6 +270,7 @@ class VideoAssetResource extends Resource
                                       //Repeater of sub themes (classificatins)
                                       Repeater::make('sub_ratings')
                                               ->label('Sub Ratings')
+                                              ->collapsible()
                                               ->addActionLabel('Add a Sub Rating')
                                               ->hint('This is a hint')
                                               ->helperText('These sub-ratings are optional classifications associated with the rating')
@@ -236,22 +319,27 @@ class VideoAssetResource extends Resource
     /**
      * Returns a repeater to define chapters
      *
-     * @return Repeater
+     * @return Section
      */
     protected static function getChaptersField(): Section
     {
-        return Section::make('Chapters')->schema([
-            Repeater::make('pl_media_chapters')
-                    ->label('Chapters')
-                    ->addActionLabel('Add Chapter')
-                    ->schema([
-                        TextInput::make('start_time')
-                                 ->helperText('The start time for this chapter segment')
-                                 ->required()->hint('e.g. 453.0'),
-                        TextInput::make('title')
-                                 ->required()
-                    ])
-        ])->description('Define a collection of chapters for this asset');
+        return Section::make('Chapters')
+                      ->collapsible()
+                      ->default([])
+                      ->schema([
+                          Repeater::make('pl_media_chapters')
+                                  ->label('Chapters')
+                                  ->collapsible()
+                                  ->default([])
+                                  ->addActionLabel('Add Chapter')
+                                  ->schema([
+                                      TextInput::make('start_time')
+                                               ->helperText('The start time for this chapter segment')
+                                               ->required()->hint('e.g. 453.0'),
+                                      TextInput::make('title')
+                                               ->required()
+                                  ])
+                      ])->description('Define a collection of chapters for this asset');
     }
 
 }
